@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComesticModelStoreContainer" CdmEntityContainer="ComesticEntities1">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="ComesticModel.Admin">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="adId" ColumnName="adId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ComesticModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="cateId" ColumnName="cateId" />
+          <ScalarProperty Name="cateName" ColumnName="cateName" />
+          <ScalarProperty Name="cateImage" ColumnName="cateImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="ComesticModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="contId" ColumnName="contId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="ComesticModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="newsId" ColumnName="newsId" />
+          <ScalarProperty Name="newsName" ColumnName="newsName" />
+          <ScalarProperty Name="newsContent" ColumnName="newsContent" />
+          <ScalarProperty Name="newsImage" ColumnName="newsImage" />
+          <ScalarProperty Name="dayUpdate" ColumnName="dayUpdate" />
+          <ScalarProperty Name="newsIntroduce" ColumnName="newsIntroduce" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producers">
+      <EntityTypeMapping TypeName="ComesticModel.Producer">
+        <MappingFragment StoreEntitySet="Producer">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="prodName" ColumnName="prodName" />
+          <ScalarProperty Name="prodAddress" ColumnName="prodAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ComesticModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="prId" ColumnName="prId" />
+          <ScalarProperty Name="prName" ColumnName="prName" />
+          <ScalarProperty Name="cateId" ColumnName="cateId" />
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddContact" FunctionName="ComesticModel.Store.AddContact" />
+    <FunctionImportMapping FunctionImportName="FindProduct" FunctionName="ComesticModel.Store.FindProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComesticModel.FindProduct_Result">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="prodName" ColumnName="prodName" />
+          <ScalarProperty Name="prodAddress" ColumnName="prodAddress" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComesticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="adId" />
+    </Key>
+    <Property Name="adId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="cateId" />
+    </Key>
+    <Property Name="cateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cateName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="cateImage" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="contId" />
+    </Key>
+    <Property Name="contId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="newsId" />
+    </Key>
+    <Property Name="newsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="newsName" Type="nvarchar" MaxLength="50" />
+    <Property Name="newsContent" Type="nvarchar(max)" />
+    <Property Name="newsImage" Type="varchar" MaxLength="100" />
+    <Property Name="dayUpdate" Type="date" />
+    <Property Name="newsIntroduce" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Producer">
+    <Key>
+      <PropertyRef Name="prodId" />
+    </Key>
+    <Property Name="prodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prodName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="prodAddress" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="prId" />
+    </Key>
+    <Property Name="prId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cateId" Type="int" Nullable="false" />
+    <Property Name="prodId" Type="int" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="images" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="dateUpdate" Type="date" />
+  </EntityType>
+  <Association Name="FK__Product__cateId__2E1BDC42">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="cateId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="cateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__prodId__2F10007B">
+    <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producer">
+        <PropertyRef Name="prodId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="int" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FindProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PrId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ComesticModelStoreContainer">
+    <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Product__cateId__2E1BDC42" Association="Self.FK__Product__cateId__2E1BDC42">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__prodId__2F10007B" Association="Self.FK__Product__prodId__2F10007B">
+      <End Role="Producer" EntitySet="Producer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

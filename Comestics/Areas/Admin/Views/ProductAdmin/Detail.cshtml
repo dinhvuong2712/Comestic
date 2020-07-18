@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var detail = (Models.EFrame.Product)ViewBag.ProductId;
+    var category = (Models.EFrame.Category)ViewBag.Category;
+    var categoryList = (List<Models.EFrame.Category>)ViewBag.CategoryList;
+    var producer = (Models.EFrame.Producer)ViewBag.Producer;
+    var caletedPr = (List<Models.EFrame.Product>)ViewBag.CaletedPr;
+}
+
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">@ViewBag.Title</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="container-fluid border pt-3 pb-3">
+                            <div class="row">
+                                <div class="col-5">
+                                    <img src="~/Images/product/@detail.images" class="img-fluid float-right" style="object-fit:cover; width:400px;" alt="Alternate Text" />
+                                </div>
+                                <div class="col-7">
+                                    <div class="pt-0 pl-2 pr-2 pb-2"><strong>Tên sản phẩm: </strong>@detail.prName</div>
+                                    <div class="p-2"><strong>Loại sản phẩm: </strong>@category.cateName</div>
+                                    <div class="p-2"><strong>Nhà sản xuất: </strong>@producer.prodName</div>
+                                    <div class="p-2"><label><strong>Mô tả: </strong></label><br/><textarea class="form-control w-100" readonly rows="4">@detail.description</textarea></div>
+                                    <div class="p-2"><strong>Đơn giá: </strong>@detail.price VNĐ</div>
+                                    <div class="p-2"><strong>Số lượng: </strong>@detail.amount</div>
+                                    <div class="p-2"><a href="@Url.Action("Update","ProductAdmin",new { id = detail.prId})" id="click_update" class="btn btn-info">Sửa</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>

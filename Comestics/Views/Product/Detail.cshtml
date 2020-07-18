@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var productId = (Models.EFrame.Product)ViewBag.ProductId;
+    var category = (Models.EFrame.Category)ViewBag.Category;
+    var producer = (Models.EFrame.Producer)ViewBag.Producer;
+    var caletedPr = (List<Models.EFrame.Product>)ViewBag.CaletedPr;
+    var news = (List<Models.EFrame.News>)ViewBag.News;
+} 
+<div class="container-fluid detail">
+    <div class="container-fluid detail-bg" style="border:none !important;"></div>
+    <div class="container detail-cont" id="DetailForm">
+        <div class="headerText text-center pt-5" style="border-bottom: solid 1px #ffffff;">
+            <div class="offset-sm-2 col-sm-8  pt-5">
+                <h1 style="color:white;">Chi tiết sản phẩm</h1>
+            </div>
+        </div>
+        <div class="row p-3">
+            <div class="col-6 pt-3 pl-3 pr-0 pb-0">
+                <img src="~/Images/product/@productId.images" style="position:absolute;top:0;right:0;width: 450px;height: 450px;object-fit: cover;overflow: hidden;" alt="">
+            </div>
+            <div class="col-6 pt-3 pl-3 pr-0 pb-0">
+                <h3 style="text-transform: uppercase;color:white;">@productId.prName</h3>
+                <p style="color:white;">Loại sản phẩm: @category.cateName</p>
+                <p style="color:white;">Nhà sản xuất: @producer.prodName</p>
+                <p style="color:white;">Mô tả: @productId.description</p>
+                @using (Html.BeginForm("AddCart", "Cart"))
+                {
+                    <div class="form-group" style="height:38px;">
+                        <input type="hidden" name="id" id="id" value="@productId.prId" />
+                        <div class="form-row" style="height:38px;">
+                            <p class="m-0 d-flex justify-content-center align-items-center ml-1 mr-1 btn btn-light" id="minus" style="cursor:pointer; width:38px;">
+                                <img src="~/Images/icon/minus.png" style="width:25px;" alt="Alternate Text" />
+                            </p>
+                            <input type="text" name="amounts" id="amounts" value="" data-max="@productId.amount" class="col-2 form-control" readonly />
+                            <p class="m-0 d-flex justify-content-center align-items-center ml-1 mr-1 btn btn-light" id="plus" style="cursor:pointer; width:38px;">
+                                <img src="~/Images/icon/plus.png" style="width:25px;" alt="Alternate Text" />
+                            </p>
+                        </div>
+                    </div>
+                    <p class="bg-light w-25 rounded" style="color:orangered;">@productId.price $</p>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-sm" id="AddCart"><img src="~/Images/icon/add-to-the-cart.png" style="width:30px;" alt="Alternate Text" /></button>
+                        <a class="btn btn-danger btn-sm" href="@Url.Action("BuyOne","Cart")">Mua</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@if (caletedPr.Count > 0)
+{
+    <section class="blog bg-light">
+        <div class="container pb-5">
+            <div class="headerText text-center">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1>Sản phẩm liên quan</h1>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in caletedPr)
+                {
+                    <div class="col-3">
+                        <div class="relatedBox">
+                            <a href="/Product/@item.prName - @item.prId">
+                                <div class="relatedImg">
+                                    <img src="~/Images/product/@item.images" class="img-fluid" alt="">
+                                </div>
+                                <div class="relatedContent">
+                                    <h3>@item.prName</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+<section class="news bg-light pt-5 border-top border-dark" id="news">
+    <div class="container">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8">
+                <h1>Tin tức</h1>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in news)
+            {
+                var url = "/News/" + item.newsName + "-" + item.newsId;
+                <div class="col-md-4">
+                    <div class="newBox">
+                        <a href="@url">
+                            <div class="imgBox">
+                                <img src="~/Images/news/@item.newsImage" class="img-fluid" alt="">
+                            </div>
+                            <div class="content">
+                                <h3>@item.newsName</h3>
+                                <p>@item.newsIntroduce</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container text-center pt-4 pb-5">
+        <a class="link-see" href="/News">Xem thêm <i class="fa fa-arrow-right"></i></a>
+    </div>
+</section>
+

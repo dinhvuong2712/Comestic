@@ -1,0 +1,91 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var listdetail = (IPagedList<Models.EFrame.DetailCart>)ViewBag.ListDetail;
+}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">@ViewBag.Title</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">@ViewBag.Title</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <i class="fas fa-table mr-1"></i>Bảng sản phẩm
+                    </div>
+                    <div class="col-6">
+                        <form action="/" method="post" class="d-flex justify-content-end">
+                            <input type="text" class="form-control mr-2 w-50" name="search" value="" />
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên tài khoản</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Trạng thái</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in listdetail)
+                            {
+                            <tr>
+                                <td><a href="@Url.Action("Detail","ProductAdmin",new { id = item.prId })">@item.id</a></td>
+                                <td>@item.Customer.username</td>
+                                <td>@item.Product.prName</td>
+
+                                <td>
+                                    @if (item.status == 1)
+                                    {
+                                        <p class="nav-link p-0">Trong giỏ</p>
+                                    }
+                                    else if (item.status == 2)
+                                    {
+                                        <a class="nav-link p-0" href="@Url.Action("ChangeDetailCart","CartCustomer",new {changeId = "chot", id = item.id})">
+                                            <p>Chốt đơn</p>
+                                        </a>
+                                    }
+                                    else if (item.status == 3)
+                                    {
+                                        <a class="nav-link p-0" href="@Url.Action("ChangeDetailCart","CartCustomer",new {changeId = "nhan", id = item.id})">
+                                            <p>Vận chuyển</p>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <p class="nav-link p-0">Đã nhận</p>
+                                    }
+                                </td>
+
+                                <td>@item.price.ToString("#,##0").Replace(',', '.')-VNĐ</td>
+                                <td>@item.amounts</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-secondary">
+                <div class="btn-group rounded-circle mt-1">
+                    @Html.PagedListPager(listdetail, x => Url.Action("Index", "CartCustomer", new { Area = "Admin", currentPage = x }),
+                        new PagedListRenderOptions
+                        {
+                            LiElementClasses = new string[] { "nav-link btn-light" }
+                        }
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

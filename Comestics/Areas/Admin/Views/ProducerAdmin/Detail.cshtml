@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var ListDL = (Models.EFrame.Producer)ViewBag.ListDL;
+}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Chi tiết nhà sản xuất</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Chi tiết nhà sản xuất</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="container-fluid border pt-3 pb-3">
+                        <div class="row">
+                            <div class="col-5">
+                            </div>
+                            <div class="col-7">
+                                <div class="pt-0 pl-2 pr-2 pb-2"><strong>Tên nhà sản xuất: </strong>@ListDL.prodName</div>
+                                <div class="p-2"><strong>Địa chỉ: </strong>@ListDL.prodAddress</div>
+                                <div class="p-2">
+                                    <a href="@Url.Action("Update","ProducerAdmin",new { id = ListDL.prodId})" id="click_update" class="btn btn-info">Sửa</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

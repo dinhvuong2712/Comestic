@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComesticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="cateId" />
+    </Key>
+    <Property Name="cateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cateName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="cateImage" Type="varchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="contId" />
+    </Key>
+    <Property Name="contId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone" Type="int" />
+    <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Credential">
+    <Key>
+      <PropertyRef Name="GroupId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="GroupId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="200" />
+    <Property Name="email" Type="varchar" MaxLength="200" />
+    <Property Name="status" Type="int" />
+    <Property Name="GroupId" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="DetailCart">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prId" Type="int" />
+    <Property Name="customerId" Type="int" />
+    <Property Name="price" Type="int" />
+    <Property Name="amounts" Type="int" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="newsId" />
+    </Key>
+    <Property Name="newsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="newsName" Type="nvarchar" MaxLength="50" />
+    <Property Name="newsContent" Type="nvarchar(max)" />
+    <Property Name="newsImage" Type="varchar" MaxLength="100" />
+    <Property Name="dayUpdate" Type="date" />
+    <Property Name="newsIntroduce" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Producer">
+    <Key>
+      <PropertyRef Name="prodId" />
+    </Key>
+    <Property Name="prodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prodName" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="prodAddress" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="prId" />
+    </Key>
+    <Property Name="prId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cateId" Type="int" Nullable="false" />
+    <Property Name="prodId" Type="int" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="images" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="amount" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="dateUpdate" Type="date" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="Quantri">
+    <Key>
+      <PropertyRef Name="adId" />
+    </Key>
+    <Property Name="adId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+    <Property Name="GroupId" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="QuantriNhom">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Customer__GroupI__1EA48E88">
+    <End Role="QuantriNhom" Type="Self.QuantriNhom" Multiplicity="0..1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuantriNhom">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailCart__custo__18EBB532">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="DetailCart">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DetailCart__prId__17F790F9">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="DetailCart" Type="Self.DetailCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="prId" />
+      </Principal>
+      <Dependent Role="DetailCart">
+        <PropertyRef Name="prId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__cateId__2E1BDC42">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="cateId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="cateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__prodId__2F10007B">
+    <End Role="Producer" Type="Self.Producer" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producer">
+        <PropertyRef Name="prodId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="prodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Quantri__GroupId__1CBC4616">
+    <End Role="QuantriNhom" Type="Self.QuantriNhom" Multiplicity="0..1" />
+    <End Role="Quantri" Type="Self.Quantri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuantriNhom">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="Quantri">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddContact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="int" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="AddDetail_Order" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PrId" Type="int" Mode="In" />
+    <Parameter Name="OrderId" Type="int" Mode="In" />
+    <Parameter Name="Amounts" Type="int" Mode="In" />
+    <Parameter Name="Price" Type="int" Mode="In" />
+    <Parameter Name="Status" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NameOrder" Type="nvarchar" Mode="In" />
+    <Parameter Name="EmailOrder" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Check_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="FindProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PrId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SubtractionProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdProduct" Type="int" Mode="In" />
+    <Parameter Name="AmountsSubtrac" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ComesticModelStoreContainer">
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Credential" EntityType="Self.Credential" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetailCart" EntityType="Self.DetailCart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quantri" EntityType="Self.Quantri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuantriNhom" EntityType="Self.QuantriNhom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Customer__GroupI__1EA48E88" Association="Self.FK__Customer__GroupI__1EA48E88">
+      <End Role="QuantriNhom" EntitySet="QuantriNhom" />
+      <End Role="Customer" EntitySet="Customer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailCart__custo__18EBB532" Association="Self.FK__DetailCart__custo__18EBB532">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="DetailCart" EntitySet="DetailCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DetailCart__prId__17F790F9" Association="Self.FK__DetailCart__prId__17F790F9">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="DetailCart" EntitySet="DetailCart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__cateId__2E1BDC42" Association="Self.FK__Product__cateId__2E1BDC42">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__prodId__2F10007B" Association="Self.FK__Product__prodId__2F10007B">
+      <End Role="Producer" EntitySet="Producer" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Quantri__GroupId__1CBC4616" Association="Self.FK__Quantri__GroupId__1CBC4616">
+      <End Role="QuantriNhom" EntitySet="QuantriNhom" />
+      <End Role="Quantri" EntitySet="Quantri" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

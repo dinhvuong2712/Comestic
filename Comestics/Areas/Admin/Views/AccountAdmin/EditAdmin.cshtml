@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Cập nhật người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var findcustomer = (Models.EFrame.Quantri)ViewBag.TimTaiKhoan;
+}
+<section class="account h-auto" id="account">
+    <div class="container-fluid w-100 h-100 pt-4" style="background-color: rgba(0, 0, 0, .5);">
+        <div class="container w-50">
+            <div class="headerText text-center mt-5 mb-0">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1 class="text-light">@ViewBag.Title</h1>
+                </div>
+            </div>
+            @using (Html.BeginForm("EditAmin", "AccountAdmin", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="username" class="text-light">Username</label>
+                    @Html.ValidationSummary()
+                    <input type="hidden" name="id" value="@findcustomer.adId" />
+                    <input type="text" name="username" class="form-control" value="@findcustomer.username" />
+                </div>
+                <div class="form-group">
+                    <label for="password" class="text-light">Password</label>
+                    @Html.ValidationSummary()
+                    <input type="password" name="password" class="form-control" value="@findcustomer.password" />
+                </div>
+
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-light w-50">Sửa</button>
+                </div>
+            }
+        </div>
+    </div>
+</section>

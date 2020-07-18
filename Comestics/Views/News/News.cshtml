@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var newsId = (Models.EFrame.News)ViewBag.NewsId;
+}
+
+<section class="contentCart">
+    <div class="container">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8">
+                <h1>News</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-4">
+                <div class="media position-relative">
+                    <img src="~/Images/news/@newsId.newsImage" class="mr-3 img-fluid" style="width: 400px;height: 300px;object-fit: cover;" alt="...">
+                    <div class="media-body">
+                        <h2 class="mt-0 text-primary">@newsId.newsName</h2>
+                        <p>
+                            @newsId.newsContent
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComesticModelStoreContainer" CdmEntityContainer="ComesticEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="ComesticModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="cateId" ColumnName="cateId" />
+          <ScalarProperty Name="cateName" ColumnName="cateName" />
+          <ScalarProperty Name="cateImage" ColumnName="cateImage" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="ComesticModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="contId" ColumnName="contId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credentials">
+      <EntityTypeMapping TypeName="ComesticModel.Credential">
+        <MappingFragment StoreEntitySet="Credential">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="ComesticModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailCarts">
+      <EntityTypeMapping TypeName="ComesticModel.DetailCart">
+        <MappingFragment StoreEntitySet="DetailCart">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="prId" ColumnName="prId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="amounts" ColumnName="amounts" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="ComesticModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="newsId" ColumnName="newsId" />
+          <ScalarProperty Name="newsName" ColumnName="newsName" />
+          <ScalarProperty Name="newsContent" ColumnName="newsContent" />
+          <ScalarProperty Name="newsImage" ColumnName="newsImage" />
+          <ScalarProperty Name="dayUpdate" ColumnName="dayUpdate" />
+          <ScalarProperty Name="newsIntroduce" ColumnName="newsIntroduce" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producers">
+      <EntityTypeMapping TypeName="ComesticModel.Producer">
+        <MappingFragment StoreEntitySet="Producer">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="prodName" ColumnName="prodName" />
+          <ScalarProperty Name="prodAddress" ColumnName="prodAddress" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="ComesticModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="prId" ColumnName="prId" />
+          <ScalarProperty Name="prName" ColumnName="prName" />
+          <ScalarProperty Name="cateId" ColumnName="cateId" />
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="dateUpdate" ColumnName="dateUpdate" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quantris">
+      <EntityTypeMapping TypeName="ComesticModel.Quantri">
+        <MappingFragment StoreEntitySet="Quantri">
+          <ScalarProperty Name="adId" ColumnName="adId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuantriNhoms">
+      <EntityTypeMapping TypeName="ComesticModel.QuantriNhom">
+        <MappingFragment StoreEntitySet="QuantriNhom">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ComesticModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ComesticModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddContact" FunctionName="ComesticModel.Store.AddContact" />
+    <FunctionImportMapping FunctionImportName="AddDetail_Order" FunctionName="ComesticModel.Store.AddDetail_Order" />
+    <FunctionImportMapping FunctionImportName="AddOrder" FunctionName="ComesticModel.Store.AddOrder" />
+    <FunctionImportMapping FunctionImportName="Check_User" FunctionName="ComesticModel.Store.Check_User" />
+    <FunctionImportMapping FunctionImportName="FindProduct" FunctionName="ComesticModel.Store.FindProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComesticModel.FindProduct_Result">
+          <ScalarProperty Name="prodId" ColumnName="prodId" />
+          <ScalarProperty Name="prodName" ColumnName="prodName" />
+          <ScalarProperty Name="prodAddress" ColumnName="prodAddress" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ComesticModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ComesticModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ComesticModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ComesticModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComesticModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ComesticModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComesticModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ComesticModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ComesticModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="SubtractionProduct" FunctionName="ComesticModel.Store.SubtractionProduct" />
+  </EntityContainerMapping>
+</Mapping>

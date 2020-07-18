@@ -1,0 +1,51 @@
+﻿@model Comestics.Models.CreateAccountModel
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="account h-auto" id="account">
+    <div class="container-fluid w-100 h-100 pt-4" style="background-color: rgba(0, 0, 0, .5);">
+        <div class="container w-50">
+            <div class="headerText text-center mt-5 mb-0">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1 class="text-light">@ViewBag.Title</h1>
+                </div>
+            </div>
+            @using (Html.BeginForm("CreateAccount", "Customer", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="username" class="text-light">Username</label>
+                    @Html.ValidationMessageFor(x => x.username)
+                    @Html.TextBoxFor(x => x.username, new { @type = "text", @class = "form-control", placeholder = "Username", @id = "username" })
+                </div>
+                <div class="form-group">
+                    <label for="password" class="text-light">Password</label>
+                    @Html.ValidationMessageFor(x => x.password)
+                    @Html.TextBoxFor(x => x.password, new { @type = "password", @class = "form-control", placeholder = "Password", @id = "password" })
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword" class="text-light">Confirm Password</label>
+                    @Html.ValidationMessageFor(x => x.confirmPassword)
+                    @Html.TextBoxFor(x => x.confirmPassword, new { @type = "password", @class = "form-control", placeholder = "Password", @id = "password" })
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone" class="text-light">Phone</label>
+                    @Html.ValidationMessageFor(x => x.Phone)
+                    @Html.TextBoxFor(x => x.Phone, new { @type = "text", @class = "form-control", placeholder = "+84", @id = "phone" })
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="text-light">Email</label>
+                    @Html.ValidationMessageFor(x => x.email)
+                    @Html.TextBoxFor(x => x.email, new { @type = "email", @class = "form-control", placeholder = "@something.com", @id = "email" })
+                </div>
+                <div class="form-group">
+                    <label for="inputTextarea" class="text-light">Address</label>
+                    @Html.TextAreaFor(x => x.address, new { @type = "textarea", @class = "form-control", @id = "address", cols = "10", rows = "3" })
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-light w-50">Send</button>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

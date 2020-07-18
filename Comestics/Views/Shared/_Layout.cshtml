@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shop cosmetics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/style-cart.css" rel="stylesheet" />
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    @{
+        Html.RenderPartial("_Header");
+    }
+    @RenderBody()
+    @{
+        Html.RenderPartial("_Search");
+    }
+    <span class="goTop" id="goTop"><img src="~/Images/icon/up-arrow.png" style="margin-top:2px;margin-left:5px;width:30px;" alt="Alternate Text" /></span>
+    <footer>
+        <div class="container text-center d-flex flex-column">
+            <ul class="navbar-nav d-flex flex-row">
+                <li class="nav-item pl-3 pr-3"><a href="https://www.facebook.com/" class="nav-link text-secondary icon-footer"><img src="~/Images/icon/facebook.png" style="width:30px;" alt="Alternate Text" /></a></li>
+                <li class="nav-item pl-3 pr-3"><a href="#" class="nav-link text-secondary icon-footer"><img src="~/Images/icon/twitter.png" style="width:30px;" alt="Alternate Text" /></a></li>
+                <li class="nav-item pl-3 pr-3"><a href="#" class="nav-link text-secondary icon-footer"><img src="~/Images/icon/instagram.png" style="width:30px;" alt="Alternate Text" /></a></li>
+            </ul>
+            <p>Thông tin liên hệ: <a class="text-secondary icon-footer" href="#contact">Shop Cosmetic</a> peterace246@gmail.com</p>
+        </div>
+    </footer>
+    <script type="text/javascript" src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/popper.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/cart_and_bar.js"></script>
+    <script type="text/javascript" src="~/Scripts/ScrollTop.js"></script>
+    @if (IsSectionDefined("updatecart"))
+    {
+        @RenderSection("updatecart", true);
+    }
+</body>
+</html>

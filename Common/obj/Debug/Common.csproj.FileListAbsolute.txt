@@ -1,0 +1,6 @@
+C:\Users\PC\source\repos\Comestics\Common\bin\Debug\Common.dll
+C:\Users\PC\source\repos\Comestics\Common\bin\Debug\Common.pdb
+C:\Users\PC\source\repos\Comestics\Common\obj\Debug\Common.csprojAssemblyReference.cache
+C:\Users\PC\source\repos\Comestics\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\PC\source\repos\Comestics\Common\obj\Debug\Common.dll
+C:\Users\PC\source\repos\Comestics\Common\obj\Debug\Common.pdb

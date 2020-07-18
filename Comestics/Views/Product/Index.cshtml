@@ -1,0 +1,54 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listsp = (IPagedList<Models.EFrame.Product>)ViewBag.ListPR;
+}
+<section class="blog mt-5" id="blog">
+    <div class="container mt-5">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8">
+                <h1>@ViewBag.Title</h1>
+            </div>
+        </div>
+        <div class="row" id="form_list">
+            @foreach (var item in listsp)
+            {
+                <div class="col-md-6 pt-0">
+                    <div class="blogPost">
+                        <div class="imgBox">
+                            <img src="~/Images/product/@item.images" class="img-fluid" alt="">
+                        </div>
+                        <a href="~/Product/@item.prName-@item.prId">
+                            <div class="content">
+                                <h3>@item.prName<br /><span>@item.price</span></h3>
+                            </div>
+                        </a>
+                        <div class="button">
+                            <a href="@Url.Action("AddCart","Cart", new { id = item.prId, amounts = 1})" class="btn btn-success text-light mr-1">
+                                <i class="fa fa-plus"></i><i class="fa fa-shopping-cart" style="font-size:20px;"></i>
+                            </a>
+                            <a href="" class="btn btn-danger text-light">Mua</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container w-100">
+        <div class="d-flex justify-content-center">
+            @Html.PagedListPager(listsp, x => Url.Action("Index", "Product", new { currentpage = x }),
+                new PagedListRenderOptions
+                {
+                    LiElementClasses = new string[] { "nav-link btn-light" }
+                }
+            )
+        </div>
+    </div>
+    <div class="container text-center pt-5 pb-5">
+        <a class="link-see" href="">Xem thêm <i class="fa fa-arrow-right"></i></a>
+    </div>
+</section>
+
+
+

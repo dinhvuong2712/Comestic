@@ -1,0 +1,66 @@
+﻿@model Models.EFrame.Category
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var prCate = (List<Models.EFrame.Product>)ViewBag.ProductCate;
+    var news = (List<Models.EFrame.News>)ViewBag.News;
+}
+
+<section class="blog p-5">
+    <div class="container">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8 pt-5 pb-2">
+                <h1>@Model.cateName</h1>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in prCate)
+            {
+                <div class="col-3">
+                    <div class="relatedBox">
+                        <a href="@Url.Action("Detail","Product",new {productId = item.prId})">
+                            <div class="relatedImg">
+                                <img src="~/Images/product/@item.images" style="object-fit:cover;width:250px;height:250px;" alt="">
+                            </div>
+                            <div class="relatedContent">
+                                <h3>@item.prName</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="news bg-light" id="news">
+    <div class="container">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8">
+                <h1>Tin tức</h1>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in news)
+            {
+                var url = "/News/" + item.newsName + "-" + item.newsId;
+                <div class="col-md-4">
+                    <div class="newBox">
+                        <a href="@url">
+                            <div class="imgBox">
+                                <img src="~/Images/news/@item.newsImage" class="img-fluid" alt="">
+                            </div>
+                            <div class="content">
+                                <h3>@item.newsName</h3>
+                                <p>@item.newsIntroduce</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container text-center pt-4 pb-5">
+        <a class="link-see" href="/News">Xem thêm <i class="fa fa-arrow-right"></i></a>
+    </div>
+</section>
+

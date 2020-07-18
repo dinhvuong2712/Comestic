@@ -1,0 +1,63 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var listcate = (IPagedList<Models.EFrame.Category>)ViewBag.PageListCATE;
+}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Danh sách sản phẩm</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Danh sách sản phẩm</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <i class="fas fa-table mr-1"></i>Bảng sản phẩm
+                    </div>
+                    <div class="col-6">
+                        <form action="/" method="post" class="d-flex justify-content-end">
+                            <input type="text" class="form-control mr-2 w-50" name="search" value="" />
+                            <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Hình ảnh</th>
+                                <th>Tên sản phẩm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in listcate)
+                            {
+                                <tr>
+                                    <td><a href="@Url.Action("Detail","CategotyAdmin",new { id = item.cateId })">@item.cateId</a></td>
+                                    <td><img src="~/Images/category/@item.cateImage" class="img-fluid" style="object-fit:cover; width:50px;" alt="Alternate Text" /></td>
+                                    <td>@item.cateName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-secondary">
+                <div class="btn-group rounded-circle mt-1">
+                    @Html.PagedListPager(listcate, x => Url.Action("Index", "CategoryAdmin", new { Area = "Admin", currentPage = x }),
+                        new PagedListRenderOptions
+                        {
+                            LiElementClasses = new string[] { "nav-link btn-light" }
+                        }
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

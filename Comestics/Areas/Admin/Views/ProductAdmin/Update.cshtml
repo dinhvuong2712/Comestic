@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var detail = (Models.EFrame.Product)ViewBag.ProductId;
+    var category = (Models.EFrame.Category)ViewBag.Category;
+    var categoryList = (List<Models.EFrame.Category>)ViewBag.CategoryList;
+    var producer = (Models.EFrame.Producer)ViewBag.Producer;
+    var caletedPr = (List<Models.EFrame.Product>)ViewBag.CaletedPr;
+}
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">@ViewBag.Title</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="container-fluid" id="suaform">
+                            <h2>Sửa</h2>
+                            <div>
+                                <form action="@Url.Action("Update","ProductAdmin")" method="post" enctype = "multipart/form-data">
+                                    <div class="form-group">
+                                        <label>Tên sản phẩm</label>
+                                        <input type="hidden" name="Id" value="@detail.prId" />
+                                        <input type="text" name="Name" value="@detail.prName" class="form-control w-50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hình ảnh</label>
+                                        <input type="file" name="fileBase" class="form-control-file w-75" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Loại sản phẩm</label>
+                                        <select name="Category" class="form-control w-25" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;">
+                                            @foreach (var item in categoryList)
+                                            {
+                                                if (item.cateId == detail.cateId)
+                                                {
+                                                    <option value="@item.cateId" selected>@item.cateName</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.cateId">@item.cateName</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nhà sản xuât</label>
+                                        <h3 class="form-control w-50">@producer.prodName</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control w-75" name="Description" rows="4" cols="5">@detail.description</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đơn giá</label>
+                                        <input type="number" name="Price" min="1" value="@detail.price" class="form-control w-25" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input type="number" name="Amounts" value="@detail.amount" class="form-control w-25" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="width:100px;">Sửa</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+

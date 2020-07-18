@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var newsList = (List<Models.EFrame.News>)ViewBag.NewsList;
+}
+
+<section class="contentCart">
+    <div class="container">
+        <div class="headerText text-center">
+            <div class="offset-sm-2 col-sm-8">
+                <h1>News</h1>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in newsList)
+            {
+                <div class="col-12 mt-4">
+                    <div class="media position-relative">
+                        <img src="~/Images/news/@item.newsImage" class="mr-3 img-fluid" style="width: 400px;height: 300px;object-fit: cover;" alt="...">
+                        <div class="media-body">
+                            <h2 class="mt-0">@item.newsName</h2>
+                            <p>@item.newsIntroduce</p>
+                            <a href="/News/@item.newsName-@item.newsId">Go to read</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

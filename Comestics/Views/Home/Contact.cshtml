@@ -1,0 +1,45 @@
+﻿@model Comestics.Models.ContactModel
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="contactPage" id="contact">
+    <div class="container-fluid w-100 h-100 pt-5" style="background-color: rgba(0, 0, 0, .5);">
+        <div class="container w-50">
+            <div class="headerText text-center mt-5 mb-0">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1 class="text-light">Contact</h1>
+                </div>
+            </div>
+            @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <form action="">
+                    <div class="form-row">
+                        <label class="text-light">Your name</label>
+                        <div class="col">
+                            @Html.TextBoxFor(Model => Model.FirstName, new { @type = "text", @class = "form-control", placeholder = "Last name", @id = "username" })
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(Model => Model.LastName, new { @type = "text", @class = "form-control", placeholder = "Last name", @id = "password" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="text-light">Phone</label>
+                        @Html.TextBoxFor(Model => Model.Phone, new { @type = "text", @class = "form-control", placeholder = "+84", @id = "phone" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="text-light">Email</label>
+                        @Html.TextBoxFor(Model => Model.Email, new { @type = "email", @class = "form-control", placeholder = "@something.com", @id = "email" })
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTextarea" class="text-light">Address</label>
+                        @Html.TextAreaFor(Model => Model.Address, new { @type = "textarea", @class = "form-control", @id = "address", cols = "10", rows = "3" })
+                    </div>
+                    <button type="submit" class="btn btn-light">Send</button>
+                </form>
+            }
+        </div>
+    </div>
+</section>
+

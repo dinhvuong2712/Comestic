@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cart = Session[Comestics.Common.CommonConstants.Cart_Session] as List<Comestics.Models.CartSessionModel>;
+    var user = Session[Comestics.Common.CommonConstants.User_SESSION] as Comestics.Common.UserSession;
+}
+@section updatecart{
+    @Scripts.Render("~/Scripts/ajax/updatecart")
+}
+@if (@ViewBag.StatusCart == "0")
+{
+    <section class="contentCart mx-auto pt-4">
+        <div class="container pt-4">
+            <div class="headerText text-center pt-3">
+                <div class="offset-sm-2 col-sm-8 pt-3">
+                    <h1>@ViewBag.Message</h1>
+                    <h1>@ViewBag.MessageOrder</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="contentCart">
+        <div class="container">
+            <div class="headerText mb-5 text-center">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1>@ViewBag.Title</h1>
+                </div>
+            </div>
+            <table class="table table-striped table-hover table-borderless mb-0" style="box-shadow: 0 3px 5px rgb(215, 210, 210)">
+                <thead>
+                    <tr class="bg-light">
+                        <th scope="col">Mã sp</th>
+                        <th scope="col">Tên sp</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col" class="d-flex justify-content-center">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Đặt hàng</th>
+                        <th scope="col">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    @foreach (var item in cart)
+                    {
+                        <tr>
+                            <th scope="row">@item.PrId</th>
+                            <td><a href="~/Product/@item.PrName-@item.PrId">@item.PrName</a></td>
+                            <td><img src="~/Images/product/@item.Images" alt="" style="width:2.5em;"></td>
+                            <td style="width:270px;">
+                                <div class="d-flex justify-content-center" id="form_update">
+                                    <button type="button" id="minus-@item.PrId" name="@item.PrId" onClick="minus_click(this.name);" class="btn btn-light">
+                                        <i class="m-0 d-flex justify-content-center align-items-center ml-1 mr-1" style="width:38px;">
+                                            <img src="~/Images/icon/minus.png" style="width:21px;" alt="Alternate Text" />
+                                        </i>
+                                    </button>
+                                    <input type="hidden" name="id" class="id_cart" value="@item.PrId" />
+                                    <input type="text" name="amounts" style="width:auto;" id="amounts-@item.PrId" value="@item.Amounts" data-max="@item.AmountsMax" class="col-2 form-control amounts_cart" readonly />
+                                    <button type="button" id="plus-@item.PrId" name="@item.PrId" onClick="plus_click(this.name);" class="btn btn-light">
+                                        <i class="m-0 d-flex justify-content-center align-items-center ml-1 mr-1" style="width:38px;">
+                                            <img src="~/Images/icon/plus.png" style="width:20px;" alt="Alternate Text" />
+                                        </i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <p class="pr-2" id="price-@item.PrId">@item.Price.ToString("#,##0").Replace(',', '.')</p><p>VNĐ</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <p class="pr-2" id="intoMoney-@item.PrId">@item.IntoMoney.ToString("#,##0").Replace(',', '.')</p><p>VNĐ</p>
+                                </div>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("BuyOne",new { idcart = item.IdCart})" class="btn btn-md">
+                                    <i class="text-danger p-0" style="font-size:20px;">
+                                        <img src="~/Images/icon/delete.png" style="width:25px;margin-top:-2px;" alt="Alternate Text" />
+                                    </i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("DeletedCart",new { id = item.IdCart})" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-md">
+                                    <i class="text-danger p-0" style="font-size:20px;">
+                                        <img src="~/Images/icon/delete.png" style="width:25px;margin-top:-2px;" alt="Alternate Text" />
+                                    </i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div id="DataUser">
+                <input type="hidden" id="lenght" name="name" value="@cart.Count" />
+            </div>
+            <div class="container-fluid w-100 bg-light " style="box-shadow: 0 1px 5px rgb(215, 210, 210)">
+                <div class="container w-100 d-flex justify-content-center align-items-center" id="total">
+                    <div class="d-flex justify-content-end flex-column pt-2 pr-2 border-right border-gray">
+                        <div class="d-flex justify-content-end">
+                            <p class="pr-2">Tổng số lượng:</p><p id="total_amounts">@cart.Sum(m => m.Amounts)</p>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="pr-2">Tổng thành tiền:</p><p id="total_price">@cart.Sum(m => m.IntoMoney).ToString("#,##0").Replace(',', '.')</p><p class="pl-2">VNĐ</p>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column pl-2">
+                        <button type="button" class="btn btn-primary mb-2" id="update_all">Update</button>
+                        <a class="btn btn-danger text-light" href="@Url.Action("DeletedAll","Cart")" onclick="return confirm('Bạn có chắc muốn xóa hết giỏ hàng?');">Delete All</a>
+                    </div>
+                </div>
+            </div>
+            <div class="button-hover position-relative">
+                <a class="btn btn-success btn-buy" href="@Url.Action("BuyAll","Cart")">Đặt Hàng</a>
+            </div>
+        </div>
+    </section>
+}
+
+

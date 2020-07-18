@@ -1,0 +1,130 @@
+﻿@{
+    var categoryDAO = new Models.DAO.CategoryDAO();
+    var category = categoryDAO.ListAll();
+    var cart = Session[Comestics.Common.CommonConstants.Cart_Session] as List<Comestics.Models.CartSessionModel>;
+    var user = Session[Comestics.Common.CommonConstants.User_SESSION] as Comestics.Common.UserSession;
+}
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-sm-light fixed-top" style="box-shadow:0 5px 10px rgba(0,0,0,0.3)" id="navbar">
+        <a class="navbar-brand p-0" href="/">
+            <img src="~/Images/logo.png" class="img w-75" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav text-center col-md-9 col-sm-12">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Trang chủ</a>
+                </li>
+                <li class="nav-item Dropdown">
+                    <a class="nav-link" style="cursor:pointer;">
+                        Loại sản phẩm
+                    </a>
+                    <div class="Dropdown-menu float-right bg-light">
+                        @foreach (var item in category)
+                        {
+                            <a class="dropdown-item" href="@Url.Action("Index", "Category", new { cateId = item.cateId })">@item.cateName</a>
+                        }
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/News">Tin tức</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Home/About">Về chúng tôi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="~/Home/Contact">Liên hệ</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav d-flex justify-content-end text-center col-md-3 col-sm-12">
+                <li class="nav-item Dropdown" id="shopping-cart">
+                    <a href="@Url.Action("Index","Cart")" class="nav-link position-relative">
+                        <img src="~/Images/icon/cart.png" style="width:24px;margin-top:2px;" alt="Alternate Text" />
+                        @if (cart != null && cart.Count != 0)
+                        {
+                            <span class="badge badge-danger position-absolute cartCount">@cart.Count</span>
+                        }
+                        else {}
+                    </a>
+                    <div class="Dropdown-menu dropdown-menu-right bg-secondary">
+                        <div class="overflow-auto" style="width: 250px; height: 200px;">
+                            @if (cart != null && cart.Count != 0)
+                            {
+                                foreach (var item in cart)
+                                {
+                                    <div class="media position-relative">
+                                        <a class="dropdown-item text-light" href="/Cart/">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img class="mr-3 img-fluid" src="~/Images/product/@item.Images" alt="Generic placeholder image" style="width:40px;">
+                                                    <div class="media-body">
+                                                        <h6 class="mt-0">@item.PrName</h6>
+                                                    </div>
+                                                    <span class="badge badge-danger position-absolute mt-3 rounded-circle h-25">
+                                                        @item.Amounts
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="container-fluid position-absolute d-flex align-items-center justify-content-center w-100 h-100">
+                                    <div>
+                                        <h6 class="text-light" style="pointer-events:none;">Không có sản phẩm trong giỏ hàng</h6>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link button-search" id="btnSearch"><img src="~/Images/icon/search.png" style="width:19px" alt="Alternate Text" /></a>
+                </li>
+                <li class="nav-item pt-1 dropdown">
+
+                    @if (user != null)
+                    {
+                        <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                            <img src="~/Images/icon/man-user.png" style="width:18px" alt="Alternate Text" />
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn m-0 p-0" id="dropdownMenuButton" data-toggle="dropdown">
+                            <p class="mt-1 mb-0" style="font-size: 1rem; font-weight: 400;">Đăng nhập</p>
+                        </button>
+                    }
+                    <div class="dropdown-menu dropdown-menu-right p-3 pb-0" style="width: 250px;" aria-labelledby="dropdownMenuButton" id="form_check">
+                        @Html.ValidationSummary()
+                        @if (user != null)
+                        {
+                            <div class="btn-group-vertical w-100">
+                                @if (user.GroupId != "MEMBER")
+                                {
+                                    <a class="btn btn-light w-100" href="~/Admin/CartCustomer/Index">Trang quản trị</a>
+                                }
+                                <a class="btn btn-light w-100" href="@Url.Action("Waite","Cart")">Sản phẩm đặt hàng</a>
+                                <a class="btn btn-light w-100" href="~/Login/Logout">Đăng xuất</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <form action="@Url.Action("Login","Login")" method="post">
+                                @Html.AntiForgeryToken()
+                                <div class="form-group"><input type="text" class="form-control" name="Username" id="Username" placeholder="Tài khoản" value="" /></div>
+                                <div class="form-group"><input type="password" class="form-control" name="Password" id="Password" placeholder="Mật khẩu" value="" /></div>
+                                <div class="form-group"><input class="btn btn-success" id="check_user" type="submit" value="Đăng nhập" /></div>
+                                <div class="form-group">Bạn không có tài khoản? - <br /><a href="~/Customer">Tạo tài khoản</a></div>
+                            </form>
+                        }
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

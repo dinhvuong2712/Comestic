@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mockup</title>
+    <meta name="description" content="Создание адаптивного сайта" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/style_404.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="position-absolute w-100 h-100">
+        <img src="~/Images/76NZB7A.gif" class="w-100 h-100" style="object-fit:cover;background-size:cover;" alt="Alternate Text" />
+    </div>
+    <div class="text-wrapper position-relative">
+        <div class="title" data-content="404">
+            @ViewBag.Title
+        </div>
+
+        <div class="subtitle">
+            @ViewBag.Message
+        </div>
+
+        <div class="buttons">
+            <a class="btn text-light" style="background-color:crimson;" href="~/">Go to homepage</a>
+        </div>
+    </div>
+</body>
+</html>

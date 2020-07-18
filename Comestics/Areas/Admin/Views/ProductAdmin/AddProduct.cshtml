@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+    var category = (List<Models.EFrame.Category>)ViewBag.Category;
+    var producer = (List<Models.EFrame.Producer>)ViewBag.Producer;
+}
+
+    <main>
+        <div class="container-fluid">
+            <h1 class="mt-4">@ViewBag.Title</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">@ViewBag.Title</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="container-fluid" id="suaform">
+                            <h2>Sửa</h2>
+                            <div>
+                                <form action="@Url.Action("AddProduct","ProductAdmin")" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label>Tên sản phẩm</label>
+                                        <input type="text" name="prName" value="" class="form-control w-50" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hình ảnh</label>
+                                        <input type="file" name="fileBase" class="form-control-file w-75" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Loại sản phẩm</label>
+                                        <select name="cateId" class="form-control w-25" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;">
+                                            <option>--Chọn loại sản phẩm--</option>
+                                            @foreach (var item in category)
+                                            {
+                                                <option value="@item.cateId">@item.cateName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nhà sản xuât</label>
+                                        <select name="prodId" class="form-control w-25" onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;">
+                                            <option>--Chọn nhà sản xuất--</option>
+                                            @foreach (var item in producer)
+                                            {
+                                                <option value="@item.prodId">@item.prodName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mô tả</label>
+                                        <textarea class="form-control w-75" name="description" rows="4" cols="5" placeholder="Write something"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đơn giá</label>
+                                        <input type="number" name="price" min="1" value="" class="form-control w-25" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Số lượng</label>
+                                        <input type="number" name="amount" value="" class="form-control w-25" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary" style="width:100px;">Thêm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+

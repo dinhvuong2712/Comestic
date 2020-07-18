@@ -1,0 +1,14 @@
+﻿<div class="container-fluid searchBg" id="searchBg">
+    <div class="container position-relative w-100 h-100">
+        <span class="closeSearch position-absolute d-flex justify-content-end mt-5 pt-5" style="z-index: 100;right:0;"><img src="~/Images/icon/close.png" style="width:40px;" alt="Alternate Text" /></span>
+        <div class="contentSearch position-relative">
+            @using (Html.BeginForm("SearchList", "Search", FormMethod.Post,new { @class="w-50"})) {
+                <div class="form-group position-relative">
+                    <input type="hidden" name="currentPage" value="1" />
+                    <input type="text" class="form-control position-absolute text-search" name="keyword" id="" placeholder="Tìm kiếm sản phẩm" required="">
+                    <button type="submit" class="mt-0 ml-0 pb-1 btn searchbtn float-right"><img src="~/Images/icon/search.png" style="width:21px" alt="Alternate Text" /></button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model Comestics.Areas.Admin.Data.AddNewAccModel
+@{
+    ViewBag.Title = "Thêm mới người dùng";
+
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+<section class="account h-auto" id="account">
+    <div class="container-fluid w-100 h-100 pt-4">
+        <div class="container w-50">
+            <div class="headerText text-center mt-5 mb-0">
+                <div class="offset-sm-2 col-sm-8">
+                    <h1>@ViewBag.Title</h1>
+                </div>
+            </div>
+            @using (Html.BeginForm("AddNewCustomer", "AccountCustomer", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="username">Tài khoản</label>
+                    @Html.ValidationMessageFor(x => x.username)
+                    @Html.TextBoxFor(x => x.username, new { @type = "text", @class = "form-control", placeholder = "Username", @id = "username" })
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    @Html.ValidationMessageFor(x => x.password)
+                    @Html.TextBoxFor(x => x.password, new { @type = "password", @class = "form-control", placeholder = "Password", @id = "password" })
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Nhập lại mật khẩu</label>
+                    @Html.ValidationMessageFor(x => x.confirmPassword)
+                    @Html.TextBoxFor(x => x.confirmPassword, new { @type = "password", @class = "form-control", placeholder = "Password", @id = "password" })
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email</label>
+                    @Html.ValidationMessageFor(x => x.email)
+                    @Html.TextBoxFor(x => x.email, new { @type = "email", @class = "form-control", placeholder = "@something.com", @id = "email" })
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-secondary w-50">Thêm</button>
+                </div>
+            }
+        </div>
+    </div>
+</section>
